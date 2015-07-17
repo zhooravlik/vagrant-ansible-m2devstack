@@ -1,0 +1,42 @@
+---
+  - name: Add ppa for mysql 5.6
+    apt_repository: repo='ppa:ondrej/mysql-5.6' state=present
+
+  - name: install MySQL
+    apt: name={{ item }} state=present
+    with_items:
+      - mysql-server-5.6
+      - mysql-client-5.6
+      - python-mysqldb
+
+  - name: add mysql user
+    mysql_user: name=vagrant
+                host={{ item }}
+                password=vagrant priv=*.*:ALL,GRANT
+                login_user=root
+                login_password=
+    with_items:
+      - '%'
+      - localhost
+
+  - name: create mysql databases
+    mysql_db: name={{ item }}
+              state=present
+    with_items:
+      - magento-ce
+      - magento-ee
+      - magento_integration_tests
+
+  - name: Grant access to mysql from all IPs
+    lineinfile: dest=/etc/mysql/my.cnf
+                regexp='bind-address'
+                line='#bind-address = 127.0.0.1'
+    notify: restart mysql
+
+  - file: path=/etc/mysql/conf.d state=directory
+    notify: restart mysql
+
+  - name: Install mysql command line client configuration file
+    copy: src=my.cnf.j2 dest=/home/vagrant/.my.cnf owner=vagrant group=vagrant
+    notify: restart mysql
+

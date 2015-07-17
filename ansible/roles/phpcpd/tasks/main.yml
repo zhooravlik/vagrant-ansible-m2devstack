@@ -1,0 +1,12 @@
+---
+  - name: install phpcpd
+    shell: wget https://phar.phpunit.de/phpcpd.phar
+    tags: phpcpd
+
+  - name: rename phpcpd.phar to phpcpd
+    shell: mv phpcpd.phar /usr/local/bin/phpcpd
+    tags: phpcpd
+
+  - name: make phpcpd executable
+    file: path=/usr/local/bin/phpcpd mode=a+x state=file
+    tags: phpcpd
