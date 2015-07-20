@@ -33,7 +33,8 @@ MySQL Databases: magento-ce, magento-ee
 To configure xdebug in IDE use following steps:
 1) Create new "Php remote debug" configuration.
 2) Specify server (magento.ce or magento.ee) and path mapping.
-3) Ide key (session id) - start-xdebug
+3) Ide key (session id) - "start-xdebug".
+4) Configure IDE to listen 9005 port.
 
 Also you should edit you hosts file and add:
 127.0.0.1    magento.ce
