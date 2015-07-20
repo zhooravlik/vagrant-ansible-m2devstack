@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-echo -e "------------RUN STATIC TESTS--------------:"
-OUTPUT="$(php ../magento-ce/vendor/bin/phpunit -c ../magento-ce/dev/tests/static/phpunit.xml.dist > static_report.txt)"
-echo "${OUTPUT}"
+echo -e "RUNING STATIC TESTS. Result at static-result.txt"
+php /var/www/magento-ce/vendor/bin/phpunit -c /var/www/magento-ce/dev/tests/static/phpunit.xml.dist > static-result.txt

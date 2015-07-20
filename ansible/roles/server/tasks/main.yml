@@ -11,3 +11,7 @@
     copy: src=run-static.sh dest=/var/www/magento-tests/run-static.sh
   - name: Copy integration tests script
     copy: src=run-static.sh dest=/var/www/magento-tests/run-integration.sh
+  - name: Copy integrity tests script
+    copy: src=run-integrity.sh dest=/var/www/magento-tests/run-integrity.sh
+  - name: Copy all tests script
+    copy: src=run-all.sh dest=/var/www/magento-tests/run-all.sh

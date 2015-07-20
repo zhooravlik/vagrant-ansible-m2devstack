@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-echo -e "------------RUN INTEGRATION TESTS--------------:"
-OUTPUT="$(php ../magento-ce/vendor/bin/phpunit -c ../magento-ce/dev/tests/integration/phpunit.xml.dist)"
-echo "${OUTPUT}"
+echo -e "RUNING INTEGRATION TESTS. Results at integration-result.txt"
+php /var/www/magento-ce/vendor/bin/phpunit -c /var/www/magento-ce/dev/tests/integration/phpunit.xml.dist > integration-result.txt
