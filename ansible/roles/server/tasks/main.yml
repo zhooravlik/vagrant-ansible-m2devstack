@@ -2,7 +2,7 @@
   - name: Create /var/www/magento-ce and and change permissions
     file: path=/var/www/magento-ce mode=0777 state=directory
   - name: Create /var/www/magento-ee
-    file: path=/var/www/magento-ee mode=0777 state=directory
+    file: path=/var/www/magento-ee/ce mode=0777 state=directory
   - name: Create /var/www/magento-tests
     file: path=/var/www/magento-tests mode=0777 state=directory
   - name: Copy unit tests script

@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
+M2PATH="/var/www/magento-ce"
 echo "RUNNING UNIT TESTS. Results at unit-result.txt"
-php /var/www/magento-ce/vendor/phpunit/phpunit/phpunit -c /var/www/magento-ce/dev/tests/unit/phpunit.xml.dist > unit-result.txt
+cd ${M2PATH}
+php vendor/phpunit/phpunit/phpunit -c dev/tests/unit/phpunit.xml.dist > /var/www/magento-tests/unit-result.txt
