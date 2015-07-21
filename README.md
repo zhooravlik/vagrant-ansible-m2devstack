@@ -43,12 +43,17 @@ Also you should edit you hosts file and add:
 
 This build contains scripts for integration, integrity, static and unit tests run for CE edition.
 You can find scripts at /var/www/magento-tests/
-To run all tests use ./run-all.sh command.
+To run all tests use `./run-all.sh` command.
+
 If you would like to specific tests:
-Integration tests: ./run-integration.sh
-Integrity tests: ./run-integrity.sh
-Static tests: ./run-static.sh
-Unit tests: ./run-unit.sh
+
+Integration tests: `./run-integration.sh`
+
+Integrity tests: `./run-integrity.sh`
+
+Static tests: `./run-static.sh`
+
+Unit tests: `./run-unit.sh`
 
 If you want to run static tests only on diff between branches, you can use next commands to generate files containing changed files and upload them to virtual host. Don't forget to specify branches.
 
