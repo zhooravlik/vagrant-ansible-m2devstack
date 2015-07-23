@@ -55,6 +55,8 @@ Static tests: `./run-static.sh`
 
 Unit tests: `./run-unit.sh`
 
+Legacy tests: `./run-legacy.sh`
+
 If you want to run static tests only on diff between branches, you can use next commands to generate files containing changed files and upload them to virtual host. Don't forget to specify branches.
 
 
