@@ -60,7 +60,7 @@ Legacy tests: `./run-legacy.sh`
 If you want to run static tests only on diff between branches, you can use next commands to generate files containing changed files and upload them to virtual host. Don't forget to specify branches.
 
 
-`git log origin/master..HEAD --name-status --oneline | grep -e "^[MA]" | cut -f 2 | xargs git diff origin/mainline -- | grep "+++" | cut -d "/" -f 2-100 > dev/tests/static/testsuite/Magento/Test/Php/_files/changed_files_ce.txt`
+`git log origin/mainline..HEAD --name-status --oneline | grep -e "^[MA]" | cut -f 2 | xargs git diff origin/mainline -- | grep "+++" | cut -d "/" -f 2-100 > dev/tests/static/testsuite/Magento/Test/Php/_files/changed_files_ce.txt`
 
 
-`git log origin/master..HEAD --name-status --oneline | grep -e "^[MA]" | cut -f 2 | xargs git diff origin/mainline -- | grep "+++" | cut -d "/" -f 2-100 > dev/tests/static/testsuite/Magento/Test/Legacy/_files/changed_files_ce.txt`
+`git log origin/mainline..HEAD --name-status --oneline | grep -e "^[MA]" | cut -f 2 | xargs git diff origin/mainline -- | grep "+++" | cut -d "/" -f 2-100 > dev/tests/static/testsuite/Magento/Test/Legacy/_files/changed_files_ce.txt`
