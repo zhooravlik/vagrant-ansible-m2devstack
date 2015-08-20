@@ -25,9 +25,19 @@ You can re-provision the VM using:
 If you don't need this virtual machine any more, you can delete it:
     vagrant destroy
 
+On this virtual machine you can use run Magento CE and Magento EE separately. 
+
 Magento source code directories on virtual machine:
+
 CE directory - /var/www/magento-ce
+
 EE directory - /var/www/magento-ee
+Host magento.ee is configured to use /var/www/magento-ce/ee/ as root folder.
+To build EE you should:
+1)put EE codebase to /var/www/magento-ee/ee/
+2)put CE codebase to /var/www/magento-ee/ce/
+3)Build EE (see README_EE.md)
+If you want to specify another folders for CE and EE, just edit /etc/hosts file and specify another mapping for magento.ee host.
 
 MySQL Databases: magento-ce, magento-ee, magento_integration_tests
 
@@ -57,6 +67,8 @@ Unit tests: `./run-unit.sh`
 
 Legacy tests: `./run-legacy.sh`
 
+If you want ot run tests under EE, you should configure this bash scripts to use EE folder
+
 If you want to run static tests only on diff between branches, you can use next commands to generate files containing changed files and upload them to virtual host. Don't forget to specify branches.
 
 
@@ -64,3 +76,5 @@ If you want to run static tests only on diff between branches, you can use next 
 
 
 `git log origin/mainline..HEAD --name-status --oneline | grep -e "^[MA]" | cut -f 2 | xargs git diff origin/mainline -- | grep "+++" | cut -d "/" -f 2-100 > dev/tests/static/testsuite/Magento/Test/Legacy/_files/changed_files_ce.txt`
+
+This virtual machine doesn't support automatic Magento installation. You should upload codebase to virtual machine by SSH or configure you IDE to do it.   
