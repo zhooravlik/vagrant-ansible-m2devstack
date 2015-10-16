@@ -1,13 +1,13 @@
 <VirtualHost *:80>
         ServerName magento.ee
-        DocumentRoot /var/www/magento-ee/ce
+        DocumentRoot /var/www/magento-ee/magento2ce
 
         <Directory />
                 Options FollowSymLinks
                 AllowOverride None
         </Directory>
 
-        <Directory /var/www/magento-ee/ce>
+        <Directory /var/www/magento-ee/magento2ce>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride All
                 Order allow,deny

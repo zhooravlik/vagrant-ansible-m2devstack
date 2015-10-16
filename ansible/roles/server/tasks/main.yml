@@ -1,10 +1,14 @@
 ---
   - name: Create /var/www/magento-ce and and change permissions
-    file: path=/var/www/magento-ce mode=0777 state=directory
+    file: path=/var/www/magento-ce mode=0777 state=directory owner=vagrant group=vagrant
   - name: Create /var/www/magento-ee
-    file: path=/var/www/magento-ee/ce mode=0777 state=directory
+    file: path=/var/www/magento-ee mode=0777 state=directory owner=vagrant group=vagrant
+  - name: Create /var/www/magento-ee/magento2ce
+    file: path=/var/www/magento-ee/magento2ce mode=0777 state=directory owner=vagrant group=vagrant
+  - name: Create /var/www/magento2/magento2ee
+    file: path=/var/www/magento-ee/magento2ee mode=0777 state=directory owner=vagrant group=vagrant
   - name: Create /var/www/magento-tests
-    file: path=/var/www/magento-tests mode=0777 state=directory
+    file: path=/var/www/magento-tests mode=0777 state=directory owner=vagrant group=vagrant
   - name: Copy unit tests script
     copy: src=run-unit.sh dest=/var/www/magento-tests/run-unit.sh
   - name: Copy static tests script

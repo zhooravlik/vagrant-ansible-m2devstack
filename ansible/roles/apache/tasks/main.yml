@@ -15,10 +15,16 @@
     file: src='/etc/apache2/mods-available/headers.load' dest='/etc/apache2/mods-enabled/headers.load' state=link
 
   - name: Copy ce config
-    copy: src=magento-ce.conf.j2 dest=/etc/apache2/sites-enabled/magento-ce.conf
+    copy: src=magento-ce.conf.j2 dest=/etc/apache2/sites-available/magento-ce.conf
+
+  - name: Create symlink
+    file: src=/etc/apache2/sites-available/magento-ce.conf dest=/etc/apache2/sites-enabled/magento-ce.conf owner=root group=root state=link
 
   - name: Copy ee config
-    copy: src=magento-ee.conf.j2 dest=/etc/apache2/sites-enabled/magento-ee.conf
+    copy: src=magento-ee.conf.j2 dest=/etc/apache2/sites-available/magento-ee.conf
+
+  - name: Create symlink
+    file: src=/etc/apache2/sites-available/magento-ce.conf dest=/etc/apache2/sites-enabled/magento-ce.conf owner=root group=root state=link
 
   - name: Ensure default conf is absent
     file: path=/etc/apache2/sites-enabled/000-default.conf state=absent

@@ -8,13 +8,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vconfig|
     vconfig.vm.box_url = "trusty-server-cloudimg-amd64-vagrant-disk1.box"
     #vconfig.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/utopic/current/utopic-server-cloudimg-amd64-vagrant-disk1.box"
 
-    vconfig.vm.define :magento2devbox do |config|
+    vconfig.vm.define :m2devbox do |config|
         config.vm.provider :virtualbox do |v|
-            v.customize [ "modifyvm", :id, "--memory", "4096" ]
+            v.customize [ "modifyvm", :id, "--memory", "6144" ]
         end
         config.vm.host_name = "m2dev"
-
-        config.vm.synced_folder "./", "/vagrant", :mount_options => ['dmode=777', 'fmode=666'] #, :nfs=>true
 
         config.vm.network "private_network", ip: "192.168.56.103"
 
