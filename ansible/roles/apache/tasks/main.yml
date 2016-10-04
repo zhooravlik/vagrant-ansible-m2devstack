@@ -26,6 +26,12 @@
   - name: Create symlink
     file: src=/etc/apache2/sites-available/magento-ce.conf dest=/etc/apache2/sites-enabled/magento-ce.conf owner=root group=root state=link
 
+  - name: Copy b2b config
+    copy: src=magento-b2b.conf.j2 dest=/etc/apache2/sites-available/magento-b2b.conf
+
+  - name: Create symlink
+    file: src=/etc/apache2/sites-available/magento-b2b.conf dest=/etc/apache2/sites-enabled/magento-b2b.conf owner=root group=root state=link
+
   - name: Ensure default conf is absent
     file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
 
@@ -33,7 +39,7 @@
     file: path=/etc/apache2/conf.d state=directory
 
   - name: Add hosts
-    lineinfile: dest=/etc/hosts line="127.0.0.1 magento.ce magento.ee"
+    lineinfile: dest=/etc/hosts line="127.0.0.1 magento.ce magento.ee magento.b2b"
 
   - name: Add servername config
     copy: src=servername.conf.j2 dest=/etc/apache2/conf.d/servername.conf
