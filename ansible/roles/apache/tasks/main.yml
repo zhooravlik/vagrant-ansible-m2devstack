@@ -1,0 +1,40 @@
+---
+  - name: Ensure apache is installed
+    apt: name=apache2 state=present
+
+  - name: Enable mod_rewrite
+    apache2_module: name=rewrite state=present
+
+  - name: Ensure apache is running
+    action: service name=apache2 state=started enabled=true
+
+  - name: Create symlink for rewrite module
+    file: src=/etc/apache2/mods-available/rewrite.load dest=/etc/apache2/mods-enabled/rewrite.load state=link
+
+  - name: Create symlink for headers module
+    file: src='/etc/apache2/mods-available/headers.load' dest='/etc/apache2/mods-enabled/headers.load' state=link
+
+  - name: Copy ce config
+    copy: src=magento-ce.conf.j2 dest=/etc/apache2/sites-available/magento-ce.conf
+
+  - name: Create symlink
+    file: src=/etc/apache2/sites-available/magento-ce.conf dest=/etc/apache2/sites-enabled/magento-ce.conf owner=root group=root state=link
+
+  - name: Copy ee config
+    copy: src=magento-ee.conf.j2 dest=/etc/apache2/sites-available/magento-ee.conf
+
+  - name: Create symlink
+    file: src=/etc/apache2/sites-available/magento-ce.conf dest=/etc/apache2/sites-enabled/magento-ce.conf owner=root group=root state=link
+
+  - name: Ensure default conf is absent
+    file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+
+  - name: Ensure apache has conf directory
+    file: path=/etc/apache2/conf.d state=directory
+
+  - name: Add hosts
+    lineinfile: dest=/etc/hosts line="127.0.0.1 magento.ce magento.ee"
+
+  - name: Add servername config
+    copy: src=servername.conf.j2 dest=/etc/apache2/conf.d/servername.conf
+    notify: restart apache
