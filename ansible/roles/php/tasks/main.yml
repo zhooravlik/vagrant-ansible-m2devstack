@@ -1,47 +1,45 @@
 ---
-  - name: Install PHP5 packages
+  - name: PHP | Install Ondrej PHP PPA
+    apt_repository: repo='ppa:ondrej/php' update_cache=yes
+
+  - name: Install PHP7 packages
     apt: name={{ item }} state=latest
     with_items:
-      - php5
-      - libapache2-mod-php5
-      - php5-cli
-      - php5-dev
-      - php5-mysql
+      - php7.0
+      - libapache2-mod-php7.0
+      - php7.0-cli
+      - php7.0-dev
+      - php7.0-mysql
       - php-pear
-      - php5-mcrypt
-      - php5-gd
-      - php5-curl
-      - php5-xdebug
-      - php5-memcache
-      - php5-memcached
-      - php5-readline
-      - php5-xsl
-      - php5-intl
+      - php7.0-mcrypt
+      - php7.0-gd
+      - php7.0-curl
+      - php7.0-xdebug
+      - php7.0-memcache
+      - php7.0-memcached
+      - php7.0-readline
+      - php7.0-xsl
+      - php7.0-intl
+      - php7.0-mbstring
+      - php7.0-zip
+      - php7.0-bcmath
 
   - name: Ensure php has conf directory
-    file: path=/etc/php5/conf.d state=directory
+    file: path=/etc/php/7.0/conf.d state=directory
 
   - name: Copy magento php ini config
-    copy: src=php-magento.ini.j2 dest=/etc/php5/conf.d/php-magento.ini
+    copy: src=php-magento.ini.j2 dest=/etc/php/7.0/conf.d/php-magento.ini
 
   - name: Symlink common php configuration for cli handler
-    file: src=/etc/php5/conf.d/php-magento.ini dest=/etc/php5/cli/conf.d/php-magento.ini state=link
+    file: src=/etc/php/7.0/conf.d/php-magento.ini dest=/etc/php/7.0/cli/conf.d/php-magento.ini state=link
 
   - name: Symlink common php configuration for apache2 handler
-    file: src=/etc/php5/conf.d/php-magento.ini dest=/etc/php5/apache2/conf.d/php-magento.ini state=link
+    file: src=/etc/php/7.0/conf.d/php-magento.ini dest=/etc/php/7.0/apache2/conf.d/php-magento.ini state=link
     notify: restart apache
 
   - name: Copy magento xdebug config
-    copy: src=xdebug-magento.ini.j2 dest=/etc/php5/conf.d/xdebug-magento.ini
+    copy: src=xdebug-magento.ini.j2 dest=/etc/php/7.0/conf.d/xdebug-magento.ini
 
   - name: Create symlink xdebug configuration for apache2 handler
-    file: src=/etc/php5/conf.d/xdebug-magento.ini dest=/etc/php5/apache2/conf.d/xdebug-magento.ini state=link
-    notify: restart apache
-
-  - name: Create symlink mcrypt for cli
-    file: src=/etc/php5/mods-available/mcrypt.ini dest=/etc/php5/cli/conf.d/mcrypt.ini state=link
-    notify: restart apache
-
-  - name: Create symlink mcrypt for apache2
-    file: src=/etc/php5/mods-available/mcrypt.ini dest=/etc/php5/apache2/conf.d/mcrypt.ini state=link
+    file: src=/etc/php/7.0/conf.d/xdebug-magento.ini dest=/etc/php/7.0/apache2/conf.d/xdebug-magento.ini state=link
     notify: restart apache
